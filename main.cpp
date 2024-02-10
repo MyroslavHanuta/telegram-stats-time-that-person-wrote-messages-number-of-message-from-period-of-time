@@ -7,48 +7,64 @@
 
 std::string get_file_string();
 void chose_person_to_search(std::string& name_one, std::string& name_two, std::string file_copy);
-bool choice_person(std::string name_one, std::string name_two);
+//bool choice_person(std::string name_one, std::string name_two);
 void check_first(std::string name,std::string file_c, int& message_counter, std::string& str_to_get_len);
 void check_second(std::string name,std::string file_c, int& message_counter, std::string& str_to_get_len);
 void message_period(int& time_period, std::string file_copy);
-void write_statistic(float t_c, int t_p, int m_c, int len_str, std::string name_s);
+void write_statistic(float t_c_s, int t_p, int m_c_s, int len_str_s, std::string name_s, float t_c_f, int m_s_f, std::string name_f, int len_str_f);
 
 int main() {
 
     std::string file = get_file_string();
     std::string name_f;
     std::string name_s;
-    std::string str_to_get_len;
-    bool choice;
-    float time_chatting;
+    std::string str_to_get_len_s;
+    std::string str_to_get_len_f;
+    //bool choice;
+    float time_chatting_s;
+    float time_chatting_f;
     int time_period = 0;
-    int message_counter = 0;
+    int message_counter_s = 0;
+    int message_counter_f = 0;
 
     chose_person_to_search(name_f, name_s, file);
-    choice = choice_person(name_f, name_s);
-    if (choice) {check_second(name_s,file, message_counter, str_to_get_len);}
-    else {check_first(name_f,file, message_counter, str_to_get_len);}
+    //choice = choice_person(name_f, name_s);
+    check_second(name_s,file, message_counter_s, str_to_get_len_s);
+    check_first(name_f,file, message_counter_f, str_to_get_len_f);
     message_period(time_period, file);
 
-    time_chatting = str_to_get_len.length() / 4 / 60 / time_period;
-    std::cout << time_chatting;
+    time_chatting_s = str_to_get_len_s.length() / 4 / 60 / time_period;
+    time_chatting_f = str_to_get_len_f.length() / 4 / 60 / time_period;
 
     std::string name_stat;
-    choice ? name_stat = name_s : name_stat = name_f;
-    write_statistic(time_chatting, time_period, message_counter, str_to_get_len.length(), name_stat);
+    //choice ? name_stat = name_s : name_stat = name_f;
+    write_statistic(time_chatting_s, time_period, message_counter_s, str_to_get_len_s.length(), name_s, time_chatting_f, message_counter_f, name_f, str_to_get_len_f.length());
 
 
     //std::cout << "time_chatting: " << time_chatting << " time_period: " << time_period << " message_couter: " << message_counter << " str: " << str_to_get_len;
 }
 
-void write_statistic(float t_c, int t_p, int m_c, int len_str, std::string name_s) {
+void write_statistic(float t_c_s, int t_p, int m_c_s, int len_str_s, std::string name_s, float t_c_f, int m_c_f, std::string name_f,int len_str_f) {
     std::ofstream outfile("stats.txt");
     if (outfile.is_open()){
         outfile << "Person: " << name_s << std::endl;
         outfile << std::endl;
-        outfile << "Messages sent: " << m_c << std::endl;
+        outfile << "Messages sent: " << m_c_s << std::endl;
         outfile << std::endl;
-        outfile << "Time chatting ( " << t_p << " ) days : " << t_c << " min/day";
+        outfile << "Time chatting ( " << t_p << " ) days : " << t_c_s << " min/day" << std::endl;
+        outfile << std::endl;
+        outfile << "Characters number: " << len_str_s;
+        outfile << std::endl;
+        outfile << std::endl;
+        outfile << std::endl;
+        outfile << std::endl;
+        outfile << "Person: " << name_f << std::endl;
+        outfile << std::endl;
+        outfile << "Messages sent: " << m_c_f << std::endl;
+        outfile << std::endl;
+        outfile << "Time chatting ( " << t_p << " ) days : " << t_c_f << " min/day" << std::endl;
+        outfile << std::endl;
+        outfile << "Characters number: " << len_str_f;
     }
 }
 
@@ -155,6 +171,7 @@ void check_first(std::string name,std::string file_c, int& message_counter, std:
     }
 }
 
+/*
 bool choice_person(std::string name_one, std::string name_two) {
     std::cout << "Enter person what u wanna check: " << "1." << name_one << " 2." << name_two << std::endl;
     std::string answer_str;
@@ -175,7 +192,7 @@ bool choice_person(std::string name_one, std::string name_two) {
         else {std::cout << "Error, incorrect input"; exit(0);}
     }
 }
-
+*/
 void chose_person_to_search(std::string& name_one, std::string& name_two, std::string file_copy) {
     int cursor = 0;
     std::string target = "from";
